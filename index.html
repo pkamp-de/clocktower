@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood on the Clocktower - Rollengenerator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">
+            Blood on the Clocktower<br>
+            <span class="subtitle">Rollen-Generator</span>
+        </h1>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="playerCount">Spieleranzahl:</label>
+                <input type="number" id="playerCount" min="5" max="15" value="5">
+            </div>
+            <button id="generateButton">Rollen generieren</button>
+        </div>
+
+        <div id="results" class="results hidden">
+            <div class="role-section" id="townsfolk">
+                <h2>🎭 Dorfbewohner</h2>
+                
+                <div class="role-group">
+                    <h3>Einmal-Info Rollen</h3>
+                    <div id="onceInfoRoles" class="role-list"></div>
+                </div>
+
+                <div class="role-group">
+                    <h3>Mehrfach-Info Rollen</h3>
+                    <div id="multipleInfoRoles" class="role-list"></div>
+                </div>
+
+                <div class="role-group">
+                    <h3>Andere Rollen</h3>
+                    <div id="otherRoles" class="role-list"></div>
+                </div>
+            </div>
+
+            <div class="role-section" id="outsiders">
+                <h2>⚡ Außenseiter</h2>
+                <div id="outsiderRoles" class="role-list"></div>
+            </div>
+
+            <div class="role-section" id="evilTeam">
+                <h2>😈 Böses Team</h2>
+                
+                <div class="role-group">
+                    <h3>Lakaien</h3>
+                    <div id="minionRoles" class="role-list"></div>
+                </div>
+
+                <div class="role-group">
+                    <h3>Dämon</h3>
+                    <div id="demonRoles" class="role-list"></div>
+                </div>
+            </div>
+
+            <div id="distribution" class="distribution"></div>
+            <div id="baronEffect" class="baron-effect hidden"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
