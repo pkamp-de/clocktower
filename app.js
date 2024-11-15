@@ -1,43 +1,52 @@
-// Counter Funktionen
-function incrementCount() {
-    const input = document.getElementById('playerCount');
-    const currentValue = parseInt(input.value);
-    if (currentValue < 15) {
-        input.value = currentValue + 1;
-    }
-}
+// Warte bis das Dokument geladen ist
+document.addEventListener('DOMContentLoaded', function() {
+    // Counter Funktionalität
+    const playerCount = document.getElementById('playerCount');
+    const decrementButton = document.getElementById('decrementButton');
+    const incrementButton = document.getElementById('incrementButton');
+    const generateButton = document.getElementById('generateButton');
 
-function decrementCount() {
-    const input = document.getElementById('playerCount');
-    const currentValue = parseInt(input.value);
-    if (currentValue > 5) {
-        input.value = currentValue - 1;
-    }
-}
-
-// Button Hover-Effekte
-document.querySelectorAll('.counter-button').forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        button.style.transform = 'scale(1.1)';
-        button.style.backgroundColor = '#452a5d';
+    // Increment Button
+    incrementButton.addEventListener('click', function() {
+        let value = parseInt(playerCount.value);
+        if (value < 15) {
+            playerCount.value = value + 1;
+        }
     });
-    
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'scale(1)';
-        button.style.backgroundColor = '#341E46';
+
+    // Decrement Button
+    decrementButton.addEventListener('click', function() {
+        let value = parseInt(playerCount.value);
+        if (value > 5) {
+            playerCount.value = value - 1;
+        }
     });
-});
 
-document.getElementById('generateButton').addEventListener('mouseenter', function() {
-    this.style.transform = 'translateY(-2px)';
-    this.style.backgroundColor = '#452a5d';
-    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-});
+    // Hover-Effekte für alle Buttons
+    [decrementButton, incrementButton].forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.backgroundColor = '#452a5d';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.backgroundColor = '#341E46';
+        });
+    });
 
-document.getElementById('generateButton').addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(0)';
-    this.style.backgroundColor = '#341E46';
-    this.style.boxShadow = 'none';
+    // Hover-Effekt für den Generate Button
+    generateButton.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.backgroundColor = '#452a5d';
+        this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+    });
+
+    generateButton.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.backgroundColor = '#341E46';
+        this.style.boxShadow = 'none';
+    });
 });
 
 // Rollendefinitionen
@@ -258,4 +267,6 @@ function displayResults(selectedRoles, baronSelected) {
 }
 
 // Event Listener für den Generate-Button
-document.getElementById('generateButton').addEventListener('click', generateRoles);
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('generateButton').addEventListener('click', generateRoles);
+});
