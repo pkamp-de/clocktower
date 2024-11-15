@@ -100,9 +100,7 @@ const distribution = {
     13: { townsfolk: 9, outsider: 0, minion: 3, demon: 1 },
     14: { townsfolk: 9, outsider: 1, minion: 3, demon: 1 },
     15: { townsfolk: 9, outsider: 2, minion: 3, demon: 1 }
-};
-
-// Hilfsfunktionen
+};// Hilfsfunktionen
 function shuffleArray(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -130,6 +128,20 @@ function createRoleCard(role) {
     }
 
     return div;
+}
+
+// Neue Funktion für Bluff-Rollen
+function getBluffRoles(selectedRoles) {
+    // Sammle alle nicht verwendeten Dorfbewohner und Außenseiter
+    const usedRoleNames = selectedRoles.map(role => role.name);
+    
+    const availableBluffs = [
+        ...roles.townsfolk,
+        ...roles.outsider
+    ].filter(role => !usedRoleNames.includes(role.name));
+    
+    // Mische die verfügbaren Rollen und wähle 3 aus
+    return shuffleArray(availableBluffs).slice(0, 3);
 }
 
 function generateRoles() {
@@ -227,6 +239,7 @@ function displayResults(selectedRoles, baronSelected) {
     document.getElementById('outsiderRoles').innerHTML = '';
     document.getElementById('minionRoles').innerHTML = '';
     document.getElementById('demonRoles').innerHTML = '';
+    document.getElementById('bluffRoles').innerHTML = '';
 
     // Sortiere und zeige Rollen
     selectedRoles.forEach(role => {
@@ -247,6 +260,13 @@ function displayResults(selectedRoles, baronSelected) {
         } else if (role.type === 'demon') {
             document.getElementById('demonRoles').appendChild(roleCard);
         }
+    });
+
+    // Generiere und zeige Bluff-Rollen
+    const bluffRoles = getBluffRoles(selectedRoles);
+    bluffRoles.forEach(role => {
+        const roleCard = createRoleCard(role);
+        document.getElementById('bluffRoles').appendChild(roleCard);
     });
 
     // Zeige Verteilung
