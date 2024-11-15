@@ -17,23 +17,26 @@
 
         <div class="input-section" style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
             <div class="counter-container" style="display: flex; align-items: center; gap: 1rem;">
-                <button class="counter-button" onclick="decrementCount()" style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">-</button>
+                <button onclick="decrementCount()" 
+                        style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">-</button>
                 
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                    <label for="playerCount" style="font-weight: 500;">Spieleranzahl</label>
-                    <input type="number" 
+                    <label style="font-weight: 500; color: #341E46;">Spieleranzahl</label>
+                    <input type="text" 
                            id="playerCount" 
-                           min="5" 
-                           max="15" 
                            value="8" 
                            style="width: 60px; height: 40px; text-align: center; font-size: 1.2rem; border: 2px solid #341E46; border-radius: 8px;" 
                            readonly>
                 </div>
                 
-                <button class="counter-button" onclick="incrementCount()" style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">+</button>
+                <button onclick="incrementCount()" 
+                        style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">+</button>
             </div>
 
-            <button id="generateButton" style="padding: 0.75rem 2rem; font-size: 1.1rem; background: #341E46; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Rollen generieren</button>
+            <button id="generateButton" 
+                    style="padding: 0.75rem 2rem; font-size: 1.1rem; background: #341E46; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                Rollen generieren
+            </button>
         </div>
 
         <div id="results" class="results hidden">

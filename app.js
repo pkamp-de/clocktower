@@ -1,3 +1,45 @@
+// Counter Funktionen
+function incrementCount() {
+    const input = document.getElementById('playerCount');
+    const currentValue = parseInt(input.value);
+    if (currentValue < 15) {
+        input.value = currentValue + 1;
+    }
+}
+
+function decrementCount() {
+    const input = document.getElementById('playerCount');
+    const currentValue = parseInt(input.value);
+    if (currentValue > 5) {
+        input.value = currentValue - 1;
+    }
+}
+
+// Button Hover-Effekte
+document.querySelectorAll('.counter-button').forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        button.style.transform = 'scale(1.1)';
+        button.style.backgroundColor = '#452a5d';
+    });
+    
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'scale(1)';
+        button.style.backgroundColor = '#341E46';
+    });
+});
+
+document.getElementById('generateButton').addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-2px)';
+    this.style.backgroundColor = '#452a5d';
+    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+});
+
+document.getElementById('generateButton').addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(0)';
+    this.style.backgroundColor = '#341E46';
+    this.style.boxShadow = 'none';
+});
+
 // Rollendefinitionen
 const roles = {
     townsfolk: [
@@ -103,7 +145,7 @@ function generateRoles() {
         dist.outsider += 2;
     }
     
-    // Dorfbewohner-Verteilung
+    // Berechne die Verteilung der Dorfbewohner-Typen
     let minOnceInfo, minMultipleInfo, minOther;
     
     if (baronSelected) {
@@ -215,8 +257,5 @@ function displayResults(selectedRoles, baronSelected) {
     }
 }
 
-// Event Listener
+// Event Listener für den Generate-Button
 document.getElementById('generateButton').addEventListener('click', generateRoles);
-
-// Initial setup
-document.getElementById('playerCount').value = 5;
