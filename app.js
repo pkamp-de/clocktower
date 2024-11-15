@@ -137,7 +137,7 @@ function getBluffRoles(selectedRoles) {
     
     const availableBluffs = [
         ...roles.townsfolk,
-        ...roles.outsider
+        ...roles.outsider.filter(role => role.name !== "Trunkenbold") // Trunkenbold ausschließen
     ].filter(role => !usedRoleNames.includes(role.name));
     
     // Mische die verfügbaren Rollen und wähle 3 aus
