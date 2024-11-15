@@ -8,19 +8,32 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <div class="header" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
             <img src="https://cdn.shopify.com/oxygen-v2/24098/8185/16590/1091673/build/_assets/logo-row-QPXTA5PC.png" 
                  alt="Blood on the Clocktower" 
                  style="max-width: 400px; width: 100%; height: auto; margin-bottom: 1rem;">
             <h1 style="text-align: center; color: white; margin: 0;">Rollen Generator</h1>
         </div>
 
-        <div class="input-section">
-            <div class="input-group">
-                <label for="playerCount">Spieleranzahl:</label>
-                <input type="number" id="playerCount" min="5" max="15" value="5">
+        <div class="input-section" style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+            <div class="counter-container" style="display: flex; align-items: center; gap: 1rem;">
+                <button class="counter-button" onclick="decrementCount()" style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">-</button>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <label for="playerCount" style="font-weight: 500;">Spieleranzahl</label>
+                    <input type="number" 
+                           id="playerCount" 
+                           min="5" 
+                           max="15" 
+                           value="8" 
+                           style="width: 60px; height: 40px; text-align: center; font-size: 1.2rem; border: 2px solid #341E46; border-radius: 8px;" 
+                           readonly>
+                </div>
+                
+                <button class="counter-button" onclick="incrementCount()" style="width: 40px; height: 40px; border-radius: 20px; background: #341E46; color: white; border: 2px solid white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">+</button>
             </div>
-            <button id="generateButton">Rollen generieren</button>
+
+            <button id="generateButton" style="padding: 0.75rem 2rem; font-size: 1.1rem; background: #341E46; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Rollen generieren</button>
         </div>
 
         <div id="results" class="results hidden">
