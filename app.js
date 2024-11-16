@@ -144,11 +144,17 @@ function createRoleCard(role, selectedRoles) {
     }
     // Spezialfall: Wahrsagerin
     else if (role.name === "Wahrsagerin") {
-        const redHerring = getRedHerring(selectedRoles);
-        if (redHerring) {
-            nameSpan.textContent = `${role.name} (Roter Hering: ${redHerring.name})`;
+        // Prüfe, ob die Wahrsagerin in den selectedRoles ist (also keine Bluff-Rolle)
+        const isActualRole = selectedRoles.some(r => r.name === "Wahrsagerin");
+        if (isActualRole) {
+            const redHerring = getRedHerring(selectedRoles);
+            if (redHerring) {
+                nameSpan.textContent = `${role.name} (Roter Hering: ${redHerring.name})`;
+            } else {
+                nameSpan.textContent = role.name;
+            }
         } else {
-            nameSpan.textContent = role.name;
+            nameSpan.textContent = role.name; // Bluff-Rolle ohne Roten Hering
         }
     }
     // Standardfall
