@@ -110,12 +110,52 @@ function shuffleArray(array) {
     return newArray;
 }
 
-function createRoleCard(role) {
+// Spezielle Rollenfunktionen
+function getUnusedTownsfolkRole(usedRoles) {
+    const usedRoleNames = usedRoles.map(role => role.name);
+    const availableTownsfolk = roles.townsfolk.filter(role => !usedRoleNames.includes(role.name));
+    return availableTownsfolk[Math.floor(Math.random() * availableTownsfolk.length)];
+}
+
+function getRedHerring(selectedRoles) {
+    // Filtere mögliche Rote Heringe (Dorfbewohner und Außenseiter, aber kein Einsiedler)
+    const possibleHerrings = selectedRoles.filter(role => 
+        (role.type === 'townsfolk' || role.type === 'outsider') && 
+        role.name !== 'Einsiedler' &&
+        role.name !== 'Wahrsagerin'  // Wahrsagerin selbst ausschließen
+    );
+    return possibleHerrings[Math.floor(Math.random() * possibleHerrings.length)];
+}
+
+function createRoleCard(role, selectedRoles) {
     const div = document.createElement('div');
     div.className = `role-card ${role.type}`;
     
     const nameSpan = document.createElement('span');
-    nameSpan.textContent = role.name;
+    
+    // Spezialfall: Trunkenbold
+    if (role.name === "Trunkenbold") {
+        const drunkRole = getUnusedTownsfolkRole(selectedRoles);
+        if (drunkRole) {
+            nameSpan.textContent = `${role.name} (erscheint als ${drunkRole.name})`;
+        } else {
+            nameSpan.textContent = role.name;
+        }
+    }
+    // Spezialfall: Wahrsagerin
+    else if (role.name === "Wahrsagerin") {
+        const redHerring = getRedHerring(selectedRoles);
+        if (redHerring) {
+            nameSpan.textContent = `${role.name} (Roter Hering: ${redHerring.name})`;
+        } else {
+            nameSpan.textContent = role.name;
+        }
+    }
+    // Standardfall
+    else {
+        nameSpan.textContent = role.name;
+    }
+    
     div.appendChild(nameSpan);
 
     if (role.infoType) {
@@ -130,7 +170,7 @@ function createRoleCard(role) {
     return div;
 }
 
-// Neue Funktion für Bluff-Rollen
+// Bluff-Rollen Funktion
 function getBluffRoles(selectedRoles) {
     // Sammle alle nicht verwendeten Dorfbewohner und Außenseiter
     const usedRoleNames = selectedRoles.map(role => role.name);
@@ -142,9 +182,7 @@ function getBluffRoles(selectedRoles) {
     
     // Mische die verfügbaren Rollen und wähle 3 aus
     return shuffleArray(availableBluffs).slice(0, 3);
-}
-
-function generateRoles() {
+}function generateRoles() {
     const playerCount = parseInt(document.getElementById('playerCount').value);
     
     if (!distribution[playerCount]) {
@@ -243,7 +281,7 @@ function displayResults(selectedRoles, baronSelected) {
 
     // Sortiere und zeige Rollen
     selectedRoles.forEach(role => {
-        const roleCard = createRoleCard(role);
+        const roleCard = createRoleCard(role, selectedRoles);
         
         if (role.type === 'townsfolk') {
             if (role.infoType === 'once') {
@@ -265,7 +303,7 @@ function displayResults(selectedRoles, baronSelected) {
     // Generiere und zeige Bluff-Rollen
     const bluffRoles = getBluffRoles(selectedRoles);
     bluffRoles.forEach(role => {
-        const roleCard = createRoleCard(role);
+        const roleCard = createRoleCard(role, selectedRoles);
         document.getElementById('bluffRoles').appendChild(roleCard);
     });
 
